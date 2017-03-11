@@ -25,7 +25,7 @@ class PostList extends Component {
                   로그아웃
                 </Label>
             </button>
-            <h2>Posts</h2>
+            <h2>아무말 대잔치</h2>
             <Write onCreatePost={this.props.onCreatePost}
               userInfo={this.props.userInfo}
               />

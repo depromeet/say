@@ -26,7 +26,7 @@ class Write extends Component {
               <Form.Group>
                 <Form.Field className='input-box'>
                   <Input
-                    placeholder='Post Content'
+                    placeholder='너의 아무말을 보여줘😏'
                     value={this.state.contents}
                     onChange={e => this.setState({ contents: e.target.value })}
                      />
