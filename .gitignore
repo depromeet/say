@@ -9,10 +9,12 @@
 # production
 /build
 
+# database
+/src/database
+
 # misc
 .DS_Store
 .env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
