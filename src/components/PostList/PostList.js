@@ -13,7 +13,9 @@ class PostList extends Component {
           <div className={`animated fadeIn Post-list`} >
             <Divider/>
 
-            <Label content={`I am a ${userInfo.gender}🙂`} color='teal' />
+            <Label color='teal'>
+                I am a {userInfo.gender}🙂
+            </Label>
 
             <button
                 style={{border: 'none', background: 'transparent'}}

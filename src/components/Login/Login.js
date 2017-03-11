@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import './Login.css'
-import { Button } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 
 
 class Login extends Component {
-  constructor(props) {
-      super(props);
-  }
 
     render() {
         const { closing } = this.props;
         return(
           <div className={`animated ${closing?'fadeOut':'fadeIn'} fadeIn Login`} >
             <div className="button-wrapper">
-              <Button onClick={this.props.onAuthAnonymouslyLoginFromGirl}>Girl Login</Button>
+              <Button onClick={this.props.onAuthAnonymouslyLoginFromGirl}><Icon name='female'/> Login</Button>
             </div>
             <div className="button-wrapper">
-              <Button onClick={this.props.onAuthAnonymouslyLoginFromBoy}>Boy Login</Button>
+              <Button onClick={this.props.onAuthAnonymouslyLoginFromBoy}><Icon name='male'/> Login</Button>
             </div>
           </div>
         );
