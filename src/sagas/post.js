@@ -7,9 +7,11 @@ import { database } from '../database/database';
 function* requestPost(action){
   try{
     yield put(actions.getPostRequested());
-    let posts = null;
+    let posts = {};
     yield database.ref('posts').limitToLast(100).once('value', snap => {
-        posts = snap.val();
+        if(snap.val()!==null){
+          posts = snap.val();
+        }
       })
     yield put(actions.getPostFulfilled(posts));
   } catch(e){
