@@ -8,7 +8,7 @@ function* requestPost(action){
   try{
     yield put(actions.getPostRequested());
     let posts = null;
-    yield database.ref('posts').limitToLast(15).once('value', snap => {
+    yield database.ref('posts').limitToLast(100).once('value', snap => {
         posts = snap.val();
       })
     yield put(actions.getPostFulfilled(posts));

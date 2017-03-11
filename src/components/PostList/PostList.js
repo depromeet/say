@@ -8,7 +8,7 @@ class PostList extends Component {
 
     render() {
       const userInfo = this.props.userInfo;
-      const postsArray = Object.keys(this.props.posts).map(k => this.props.posts[k])
+      const postsArray = Object.keys(this.props.posts).reverse().map(k => this.props.posts[k])
         return(
           <div className={`animated fadeIn Post-list`} >
             <Divider/>

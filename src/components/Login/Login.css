@@ -10,14 +10,18 @@
 }
 @media only screen and (max-width: 992px){
   .Login {
-    width: 40%;
+    width: 70%;
+    text-align: center;
+
     position: fixed;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
   }
-  .ui.button{
-    margin: .25em
+  .button-wrapper{
+    display:inline-block;
+    width: 47%;
+    text-align: center;
   }
 }

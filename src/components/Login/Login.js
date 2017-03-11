@@ -13,8 +13,12 @@ class Login extends Component {
         const { closing } = this.props;
         return(
           <div className={`animated ${closing?'fadeOut':'fadeIn'} fadeIn Login`} >
-            <Button onClick={this.props.onAuthAnonymouslyLoginFromGirl}>Girl Login</Button>
-            <Button onClick={this.props.onAuthAnonymouslyLoginFromBoy}>Boy Login</Button>
+            <div className="button-wrapper">
+              <Button onClick={this.props.onAuthAnonymouslyLoginFromGirl}>Girl Login</Button>
+            </div>
+            <div className="button-wrapper">
+              <Button onClick={this.props.onAuthAnonymouslyLoginFromBoy}>Boy Login</Button>
+            </div>
           </div>
         );
     }
