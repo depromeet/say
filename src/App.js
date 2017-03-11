@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Instagram from './containers/Instagram'
+import SayAnything from './containers/SayAnything'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 
@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Instagram/>
+        <SayAnything/>
       </Router>
     );
   }

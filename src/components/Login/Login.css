@@ -1,10 +1,23 @@
 @media only screen and (min-width: 992px){
   .Login {
-    width: 30%;
+    width: 20%;
     position: fixed;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
+  }
+}
+@media only screen and (max-width: 992px){
+  .Login {
+    width: 40%;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+  .ui.button{
+    margin: .25em
   }
 }

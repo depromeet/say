@@ -1,33 +1,18 @@
 import * as types from './actionTypes';
 
-export const authLoginRequestingWithEmail = (email, pw) => ({
-  type: types.AUTH_LOGIN_REQUESTING_WITH_EMAIL,
-  email,
-  pw
-});
-
-export const authLoginRequested = () => ({
-  type: types.AUTH_LOGIN_REQUESTED,
-});
-
-export const authLoginFulfilled = () => ({
-  type: types.AUTH_LOGIN_FULFILLED,
-});
-
-export const authLoginRejected = (message) => ({
-  type: types.AUTH_LOGIN_REJECTED,
-  message
-});
 
 export const authLoginDetected = (user) => ({
   type: types.AUTH_LOGIN_DETECTED,
   user
 });
 
-export const authLoginGetUserInfo = (userInfo, message) => ({
+export const authLoginGetUserInfo = (userInfo) => ({
   type: types.AUTH_LOGIN_GET_USER_INFO,
-  userInfo,
-  message
+  userInfo
+});
+
+export const authLoginRequested = () => ({
+  type: types.AUTH_LOGIN_REQUESTED,
 });
 
 export const authLogoutRequesting = () => ({
@@ -38,9 +23,8 @@ export const authLogoutRequested = () => ({
   type: types.AUTH_LOGOUT_REQUESTED,
 });
 
-export const authLogoutFulfilled = (message) => ({
-  type: types.AUTH_LOGOUT_FULFILLED,
-  message
+export const authLogoutFulfilled = () => ({
+  type: types.AUTH_LOGOUT_FULFILLED
 });
 
 export const authLogoutRejected = () => ({
@@ -55,26 +39,15 @@ export const authLogoutDetected = () => ({
   type: types.AUTH_LOGOUT_DETECTED
 });
 
-export const authRegisterRequesting = (email, pw, name) => ({
-  type: types.AUTH_REGISTER_REQUESTING,
-  email,
-  pw,
-  name
+export const authAnonymouslyLoginFromGirl = () => ({
+  type: types.AUTH_ANONYMOUSLY_LOGIN_FROM_GIRL,
 });
 
-export const authLoginRequestingWithFacebook = () => ({
-  type: types.AUTH_LOGIN_REQUESTING_WITH_FACEBOOK
+export const authAnonymouslyLoginFromBoy = () => ({
+  type: types.AUTH_ANONYMOUSLY_LOGIN_FROM_BOY,
 });
 
-export const authRegisterRequested = () => ({
-  type: types.AUTH_REGISTER_REQUESTED
-});
-
-export const authRegisterRejected = (message) => ({
-  type: types.AUTH_REGISTER_REJECTED,
+export const showMessage = (message) => ({
+  type: types.SHOW_MESSAGE,
   message
-});
-
-export const authRegisterFulfilled = () => ({
-  type: types.AUTH_REGISTER_FULFILLED,
 });

@@ -13,16 +13,7 @@ const initialState = {
 export default function auth(state = initialState, action) {
 
 	switch(action.type) {
-    case types.AUTH_LOGIN_DETECTED:
-      return {
-        ...state,
-      }
     case types.AUTH_LOGIN_REQUESTED:
-      return {
-        ...state,
-        authedLoading: true,
-      }
-    case types.AUTH_REGISTER_REQUESTED:
       return {
         ...state,
         authedLoading: true,
@@ -33,8 +24,6 @@ export default function auth(state = initialState, action) {
         authed: true,
         authedLoading: false,
         userInfo: action.userInfo,
-        messageVisibility: true,
-        message: action.message
       }
     case types.AUTH_LOGOUT_DETECTED:
       return {
@@ -42,44 +31,22 @@ export default function auth(state = initialState, action) {
         authed: false,
         authedLoading: false
       }
-    case types.AUTH_REGISTER_REJECTED:
-      return {
-        ...state,
-        requested: false,
-        messageVisibility: true,
-        message: action.message,
-        authedLoading: false
-      }
-    case types.AUTH_LOGIN_REJECTED:
-      return {
-        ...state,
-        requested: false,
-        messageVisibility: true,
-        message: action.message,
-        authedLoading: false
-      }
-    case types.AUTH_REGISTER_FULFILLED:
-      return {
-        ...state,
-        requested: false,
-      }
-    case types.AUTH_LOGIN_FULFILLED:
-      return {
-        ...state,
-        requested: false,
-      }
     case types.AUTH_LOGOUT_FULFILLED:
       return {
         ...state,
         requested: false,
-        messageVisibility: true,
-        message: action.message
+        messageVisibility: true
       }
-
     case types.HIDE_AUTH_MESSAGE:
       return {
         ...state,
         messageVisibility: false
+      }
+    case types.SHOW_MESSAGE:
+      return {
+        ...state,
+        messageVisibility: true,
+        message: action.message
       }
 
 		default:

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PostList, Message, Login, Register, Loading } from '../components';
+import { PostList, Message, Login, Loading } from '../components';
 import { getPosts, getPostAddedAction, createPost } from '../actions/post';
-import { authLoginRequestingWithEmail, authLoginRequestingWithFacebook, authLoginDetected, authLogoutDetected, authLogoutRequesting, authRegisterRequesting } from '../actions/auth';
+import * as authActions from '../actions/auth';
 import { Route, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import { firebaseAuth } from '../database/database'
@@ -70,16 +70,8 @@ class Instagram extends Component {
                   path='/say/login'
                   authed={this.props.authReducer.authed}
                   component={Login}
-                  onAuthLoginWithEmail={this.props.onAuthLoginWithEmail}
-                  onAuthLoginWithFacebook={this.props.onAuthLoginWithFacebook}
-                  closing={this.props.authReducer.authedLoading}
-                  />
-                <PublicRoute
-                  path='/say/register'
-                  authed={this.props.authReducer.authed}
-                  component={Register}
-                  onAuthRegisterRequesting={this.props.onAuthRegisterRequesting}
-                  onAuthLoginWithFacebook={this.props.onAuthLoginWithFacebook}
+                  onAuthAnonymouslyLoginFromGirl={this.props.onAuthAnonymouslyLoginFromGirl}
+                  onAuthAnonymouslyLoginFromBoy={this.props.onAuthAnonymouslyLoginFromBoy}
                   closing={this.props.authReducer.authedLoading}
                   />
                 <Message visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
@@ -103,12 +95,11 @@ function mapDispatchToProps(dispatch) {
     onGetPosts: () => dispatch(getPosts()),
     onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post)),
     onCreatePost: (post, userInfo) => dispatch(createPost(post, userInfo)),
-    onAuthLoginWithEmail: (email, pw) => dispatch(authLoginRequestingWithEmail(email, pw)),
-    onAuthLoginWithFacebook: () => dispatch(authLoginRequestingWithFacebook()),
-    onAuthLoginDetected: (user) => dispatch(authLoginDetected(user)),
-    onAuthLogoutDetected: () => dispatch(authLogoutDetected()),
-    onAuthLogoutRequesting: () => dispatch(authLogoutRequesting()),
-    onAuthRegisterRequesting: (email, pw, name) => dispatch(authRegisterRequesting(email, pw, name))
+    onAuthLoginDetected: (user) => dispatch(authActions.authLoginDetected(user)),
+    onAuthLogoutDetected: () => dispatch(authActions.authLogoutDetected()),
+    onAuthLogoutRequesting: () => dispatch(authActions.authLogoutRequesting()),
+    onAuthAnonymouslyLoginFromGirl: () => dispatch(authActions.authAnonymouslyLoginFromGirl()),
+    onAuthAnonymouslyLoginFromBoy: () => dispatch(authActions.authAnonymouslyLoginFromBoy())
   };
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Label, Input } from 'semantic-ui-react'
+import { Button, Form, Input } from 'semantic-ui-react'
 import "./Write.css";
 
 
