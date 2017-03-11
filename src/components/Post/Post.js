@@ -16,7 +16,7 @@ const Post = (props) => {
           {post.contents}
         </Card.Description>
       </Card.Content>
-      {post.fileUrl!==null?<Image src={post.fileUrl} />:''}
+      {post.fileUrl!==null?<Image src={post.fileUrl} className="card-image" />:''}
     </Card>
   );
 };

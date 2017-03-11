@@ -24,7 +24,7 @@ class Write extends Component {
       if (acceptedFiles[0]!==undefined){
         this.setState({...this.state, file: acceptedFiles[0]});
       }else{
-        this.props.onPostShowMessage("1MB 이하로만 가능합니다.")
+        this.props.onPostShowMessage("2MB 이하로만 가능합니다.")
       }
     }
 
@@ -47,7 +47,7 @@ class Write extends Component {
                 </Button>
               </Form.Group>
               <div className='image-box'>
-                <Dropzone onDrop={this.onDrop} maxSize={1048576} accept={`image/*`} className={`drop-zone`}>
+                <Dropzone onDrop={this.onDrop} maxSize={2097152} accept={`image/*`} className={`drop-zone`}>
                   <div className='explanation'>
                     {this.state.file!==null?<Image src={this.state.file.preview}/>:<Icon name="image" size="big"/>}
                   </div>
