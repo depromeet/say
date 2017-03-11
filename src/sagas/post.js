@@ -19,8 +19,7 @@ function* requestPost(action){
 }
 
 function* watchRequestPost(){
-  yield takeEvery(types.GET_POST_REQUESTING, updatedItemSaga);
-  // 실시간 동기화가 필요한 경우에는 사용
+  yield takeEvery(types.GET_POST_REQUESTING, updatedItemSaga);// 실시간 동기화
   yield takeEvery(types.GET_POST_REQUESTING, requestPost);
 }
 
