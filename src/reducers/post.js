@@ -2,8 +2,11 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   requested: false,
+  postLoading: true,
   posts: {},
-  warningVisibility: false
+  messageVisibility: false,
+  message: '',
+
 };
 
 export default function post(state = initialState, action) {
@@ -18,34 +21,38 @@ export default function post(state = initialState, action) {
       return {
         ...state,
         requested: false,
-        posts: action.posts
+        posts: action.posts,
+        postLoading: false
       };
     case types.GET_POST_REJECTED:
       return {
         ...state,
         requested: false,
-        warningVisibility: true
+        messageVisibility: true
       }
     case types.CREATE_POST_REQUESTED:
       return {
         ...state,
-        requested: true
+        requested: true,
+        postLoading: true
       };
     case types.CREATE_POST_FULFILLED:
       return {
         ...state,
         requested: false,
+        postLoading: false
       };
     case types.CREATE_POST_REJECTED:
       return {
         ...state,
         requested: false,
-        warningVisibility: true
+        messageVisibility: true,
+        postLoading: false
       }
-    case types.HIDE_WARNING:
+    case types.HIDE_POST_MESSAGE:
       return {
         ...state,
-        warningVisibility: false
+        messageVisibility: false
       }
     case types.WATCH_GUEST_ADDED_EVENT:
       return {
@@ -56,11 +63,13 @@ export default function post(state = initialState, action) {
         ...state,
         posts: Object.assign(state.posts, action.post)
       }
-    case types.UPDATED:
+    case types.POST_SHOW_MESSAGE:
       return {
         ...state,
-        item: action.payload.item
+        messageVisibility: true,
+        message: action.message
       }
+
 		default:
 			return state;
 	}

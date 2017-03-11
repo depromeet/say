@@ -47,7 +47,7 @@ export const authAnonymouslyLoginFromBoy = () => ({
   type: types.AUTH_ANONYMOUSLY_LOGIN_FROM_BOY,
 });
 
-export const showMessage = (message) => ({
-  type: types.SHOW_MESSAGE,
+export const authShowMessage = (message) => ({
+  type: types.AUTH_SHOW_MESSAGE,
   message
 });

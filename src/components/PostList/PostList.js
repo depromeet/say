@@ -27,8 +27,12 @@ class PostList extends Component {
                   로그아웃
                 </Label>
             </button>
+
             <h2>아무말 대잔치</h2>
-            <Write onCreatePost={this.props.onCreatePost}
+
+            <Write
+              onCreatePost={this.props.onCreatePost}
+              onPostShowMessage={this.props.onPostShowMessage}
               userInfo={this.props.userInfo}
               />
             {this.props.authed}
@@ -36,8 +40,7 @@ class PostList extends Component {
               <Card.Group>
                 {postsArray.map((post, index) => {
                   return (
-                      <Post contents={post.contents} key={index} userInfo={post.userInfo}>
-                      </Post>
+                      <Post post={post} key={index}/>
                   );
                 })}
               </Card.Group>

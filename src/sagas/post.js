@@ -2,7 +2,7 @@ import { delay, eventChannel } from 'redux-saga';
 import { put, takeEvery, fork, take, call } from 'redux-saga/effects';
 import * as actions from '../actions/post';
 import * as types from '../actions/actionTypes';
-import { database } from '../database/database';
+import { database, storage } from '../database/database';
 
 function* requestPost(action){
   try{
@@ -16,8 +16,8 @@ function* requestPost(action){
     yield put(actions.getPostFulfilled(posts));
   } catch(e){
     yield put(actions.getPostRejected());
+    yield put(actions.postShowMessage(`Server ERROR`));
   }
-
 }
 
 function* watchRequestPost(){
@@ -25,33 +25,47 @@ function* watchRequestPost(){
   yield takeEvery(types.GET_POST_REQUESTING, requestPost);
 }
 
-function* showWarning(action){
+function* showMessageAndHide(){
   yield delay(1500);
-  yield put(actions.hideWarning());
+  yield put(actions.hidePostMessage());
 }
 
 function* watchGetPostRejected(){
-  yield takeEvery(types.GET_POST_REJECTED, showWarning);
-  yield takeEvery(types.CREATE_POST_REJECTED, showWarning);
+  yield takeEvery(types.POST_SHOW_MESSAGE, showMessageAndHide);
 }
 
-function insertPost(post, userInfo) {
-    const newItemRef = database.ref('posts').push();
-    return newItemRef.set({
-      contents: post,
-      userInfo: userInfo
+function* insertPost(userInfo, contents, file) {
+    const filename = userInfo.uid + "-" + Date();
+    const storageRef = storage.ref();
+    const mountainsRef = storageRef.child(filename);
+    let fileUrl = null;
+    if(file!==null){
+      yield mountainsRef.put(file).then(function(snapshot) {
+        fileUrl = snapshot.a.downloadURLs[0]
+      });
+    }
+
+    const newItemRef = yield database.ref('posts').push();
+    yield newItemRef.set({
+      contents,
+      userInfo,
+      fileUrl
     });
+    return null
 }
 
 function* createPost(action) {
-    const post = action.post;
     const userInfo = action.userInfo;
+    const contents = action.contents;
+    const file = action.file;
     try {
       yield put(actions.createPostRequested());
-      yield call(insertPost, post, userInfo);
-      yield put(actions.createPostFulfilled(post));
+      yield call(insertPost, userInfo, contents, file);
+      yield put(actions.createPostFulfilled());
+      yield put(actions.postShowMessage(`Success`));
     } catch (e) {
       yield put(actions.createPostRejected());
+      yield put(actions.postShowMessage(`Create ERROR`));
     }
 }
 

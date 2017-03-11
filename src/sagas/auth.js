@@ -9,9 +9,10 @@ function* logout () {
     yield put(actions.authLogoutRequested());
     yield firebaseAuth().signOut();
     yield put(actions.authLogoutFulfilled());
-    yield put(actions.showMessage(`Goodbye`));
+    yield put(actions.authShowMessage(`Goodbye`));
   } catch(e){
     yield put(actions.authLogoutRejected());
+    yield put(actions.authShowMessage(`Logout ERROR`));
   }
 }
 
@@ -36,7 +37,7 @@ function* authAnonymouslyLoginFromGirl () {
     const user = yield firebaseAuth().signInAnonymously()
     yield saveAnonymousUser(user, "girl", userCnt+1)
   } catch(e){
-    yield put(actions.showMessage(e.message));
+    yield put(actions.authShowMessage(e.message));
   }
 }
 
@@ -53,7 +54,7 @@ function* authAnonymouslyLoginFromBoy () {
     yield saveAnonymousUser(user, "boy", userCnt+1)
 
   } catch(e){
-    yield put(actions.showMessage(e.message));
+    yield put(actions.authShowMessage(e.message));
   }
 }
 
@@ -69,13 +70,13 @@ function saveAnonymousUser (user, gender, idx) {
 
 }
 
-function* showMessage(){
+function* showMessageAndHide(){
   yield delay(1500);
   yield put(actions.hideAuthMessage());
 }
 
 function* watchShowMessage(){
-  yield takeEvery(types.SHOW_MESSAGE, showMessage);
+  yield takeEvery(types.AUTH_SHOW_MESSAGE, showMessageAndHide);
 }
 
 function* getUserInfo(action){
@@ -87,9 +88,9 @@ function* getUserInfo(action){
       userInfo = snap.val();
     })
     yield put(actions.authLoginGetUserInfo(userInfo));
-    yield put(actions.showMessage(`Hello ${userInfo.gender}`));
+    yield put(actions.authShowMessage(`Hello ${userInfo.gender}`));
   } catch(e){
-    yield put(actions.showMessage(e.message));
+    yield put(actions.authShowMessage(e.message));
   }
 }
 

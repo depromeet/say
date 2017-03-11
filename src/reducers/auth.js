@@ -35,14 +35,13 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         requested: false,
-        messageVisibility: true
       }
     case types.HIDE_AUTH_MESSAGE:
       return {
         ...state,
         messageVisibility: false
       }
-    case types.SHOW_MESSAGE:
+    case types.AUTH_SHOW_MESSAGE:
       return {
         ...state,
         messageVisibility: true,

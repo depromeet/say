@@ -18,8 +18,8 @@ export const getPostFulfilled = (posts) => ({
   posts
 });
 
-export const hideWarning = () => ({
-  type: types.HIDE_WARNING
+export const hidePostMessage = () => ({
+  type: types.HIDE_POST_MESSAGE
 });
 
 export const getPostAddedAction = (post) => ({
@@ -27,10 +27,11 @@ export const getPostAddedAction = (post) => ({
   post
 });
 
-export const createPost = (post, userInfo) => ({
+export const createPost = (userInfo, contents, file) => ({
     type: types.CREATE_POST_REQUESTING,
-    post,
-    userInfo
+    contents,
+    userInfo,
+    file
 });
 
 export const createPostRequested = () => ({
@@ -41,7 +42,11 @@ export const createPostRejected = () => ({
   type: types.CREATE_POST_REJECTED
 });
 
-export const createPostFulfilled = (posts) => ({
-  type: types.CREATE_POST_FULFILLED,
-  posts
+export const createPostFulfilled = () => ({
+  type: types.CREATE_POST_FULFILLED
+});
+
+export const postShowMessage = (message) => ({
+  type: types.POST_SHOW_MESSAGE,
+  message
 });

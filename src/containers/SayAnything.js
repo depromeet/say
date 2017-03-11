@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList, Message, Login, Loading } from '../components';
-import { getPosts, getPostAddedAction, createPost } from '../actions/post';
+import * as postActions from '../actions/post';
 import * as authActions from '../actions/auth';
 import { Route, Redirect } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
@@ -65,6 +65,7 @@ class Instagram extends Component {
                   onCreatePost={this.props.onCreatePost}
                   onAuthLogoutRequesting={this.props.onAuthLogoutRequesting}
                   authedLoading={this.props.authReducer.authedLoading}
+                  onPostShowMessage={this.props.onPostShowMessage}
                   />
                 <PublicRoute
                   path='/say/login'
@@ -74,8 +75,10 @@ class Instagram extends Component {
                   onAuthAnonymouslyLoginFromBoy={this.props.onAuthAnonymouslyLoginFromBoy}
                   closing={this.props.authReducer.authedLoading}
                   />
+                <Message visible={this.props.postReducer.messageVisibility} message={this.props.postReducer.message}/>
                 <Message visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
                 <Loading visible={this.props.authReducer.authedLoading}/>
+                <Loading visible={this.props.postReducer.postLoading}/>
             </div>
           </Container>
 
@@ -92,9 +95,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGetPosts: () => dispatch(getPosts()),
-    onGetPostAddedAction: (post) => dispatch(getPostAddedAction(post)),
-    onCreatePost: (post, userInfo) => dispatch(createPost(post, userInfo)),
+    onGetPosts: () => dispatch(postActions.getPosts()),
+    onGetPostAddedAction: (post) => dispatch(postActions.getPostAddedAction(post)),
+    onCreatePost: (userInfo, contents, file) => dispatch(postActions.createPost(userInfo, contents, file)),
+    onPostShowMessage: (message) => dispatch(postActions.postShowMessage(message)),
     onAuthLoginDetected: (user) => dispatch(authActions.authLoginDetected(user)),
     onAuthLogoutDetected: () => dispatch(authActions.authLogoutDetected()),
     onAuthLogoutRequesting: () => dispatch(authActions.authLogoutRequesting()),
