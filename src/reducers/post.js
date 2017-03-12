@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
   requested: false,
-  postLoading: true,
+  postLoading: false,
   posts: {},
   messageVisibility: false,
   message: '',
@@ -15,7 +15,8 @@ export default function post(state = initialState, action) {
     case types.GET_POST_REQUESTED:
       return {
         ...state,
-        requested: true
+        requested: true,
+        postLoading: true
       };
     case types.GET_POST_FULFILLED:
       return {
