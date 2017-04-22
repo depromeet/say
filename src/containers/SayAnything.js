@@ -14,7 +14,7 @@ function PrivateRoute ({component: Component, authed, authedLoading, path, ...re
       render={
           function(props){
             if (authedLoading===true){
-              return <Loading visible={authedLoading} />
+              return null
             }else if (authed===true){
               return <Component {...props} {...rest} authed={authed} />
             }else{
@@ -77,7 +77,6 @@ class Instagram extends Component {
                   />
                 <Message visible={this.props.postReducer.messageVisibility} message={this.props.postReducer.message}/>
                 <Message visible={this.props.authReducer.messageVisibility} message={this.props.authReducer.message}/>
-                <Loading visible={this.props.authReducer.authedLoading}/>
                 <Loading visible={this.props.postReducer.postLoading}/>
             </div>
           </Container>
